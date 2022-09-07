@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Ahorcado</title>
+  </head>
+  <body>
+    <!-- encabezado -->
+    <header>
+      <img id="logo" src="/rec/logo.svg" />
+    </header>
+    <!-- fin encabezado -->
+    <main>
+      <!-- pagina de inicio -->
+      <section id="pagina-inicio" class="seccion inicio">
+        <button class="boton iniciar">Iniciar Juego</button>
+        <button class="boton agregar">Agregar una nueva palabra</button>
+      </section>
+      <!-- fin pagina de inicio  -->
+
+      <!-- pagina agregar palabra -->
+      <section id="pagina-agregar-palabra" class="seccion agregar-palabra">
+        <textarea
+          name=""
+          id="nueva-palabra"
+          cols="10"
+          rows="10"
+          placeholder="Escriba una nueva palabra"
+          autofocus="true"
+          maxlength="8"
+          minlength="2"
+          spellcheck="false"
+        ></textarea>
+        <div id="zona-advertencia">
+          <img id="img-advertencia" src="/rec/advertencia.svg" alt="" />
+          <p id="mensaje" >Máx. de 8 letras</p>
+        </div>
+        <div class="botones">
+          <button class="boton guardar">Guardar y empezar</button>
+          <button class="boton cancelar">Cancelar</button>
+        </div>
+      </section>
+      <!-- fin pagina agregar palabra  -->
+
+      <!-- pagina de juego  -->
+      <section id="pagina-juego" class="seccion juego">
+        <div class="muneco">
+          <canvas id="canvas" width="400" height="350"></canvas>
+        </div>
+        <div id="palabra" class="palabra">
+          <!-- aca se crean los div con la palabra aleatoria -->
+        </div>
+        <div class="letras-incorrectas">Letras</div>
+        <div class="botones">
+          <button class="boton nuevo-juego">Nuevo Juego</button>
+          <button class="boton desistir">Desistir</button>
+        </div>
+      </section>
+      <!-- fin pagina de juego  -->
+    </main>
+
+    <footer>
+      <p>Hecho por mi</p>
+    </footer>
+
+    <script src="/main.js"></script>
+  </body>
+</html>

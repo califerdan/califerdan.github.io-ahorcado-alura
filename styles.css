@@ -1,0 +1,190 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+/*? encabezado */
+header{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    background-color: blueviolet;
+}
+
+    #logo{
+        padding-left: 1.5vw;
+        width: 2vw;
+        height: 6vh;
+    }
+/* fin encabezado */
+
+main{
+    height: 85vh;
+    background-color: aqua;
+}
+
+/*? pagina de inicio */
+#pagina-inicio{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+
+
+    display: none;
+
+    
+}
+    /* zona de botones en pagina inicial */
+    .boton{
+        border-radius: 1em;
+        border: 3px solid darkblue;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.3em;
+    }
+    /* boton iniciar juego */
+    .iniciar{
+        background-color: darkblue;
+        width: 25vw;
+        height: 15vh;
+        color: white;
+    }
+    /* boton agregar nueva palabra */
+    .agregar{
+        background-color: transparent;
+        color: darkblue;
+        width: 20vw;
+        height: 7vh;
+    }
+/* fin pagina de inicio */
+
+/* ? pagina donde se agrega una nueva palabra  */
+#pagina-agregar-palabra{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+
+    display: none;
+}   
+    /* textarea para cargar nueva palabra */
+    #nueva-palabra{
+        height: 50%;
+        width: 50%;
+        font-size: 2.5rem;
+        resize: none;
+        outline: none;
+        color: darkblue;
+        font-weight: 500;
+    }
+    /* zona mensaje de advertencia */
+    #zona-advertencia{
+        width: 50%;
+        display: flex;
+        justify-content: start;
+        gap: .7rem;
+        align-items: center;
+    }
+        #img-advertencia{
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+        #mensaje{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1em;
+        }
+    /* zona de botones*/
+    .botones{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2vw;
+    }
+        /* boton guardar */
+        .guardar{
+            width: 25vw;
+            height: 13vh;
+        }
+        /* boton cancelar */
+        .cancelar{
+            width: 25vw;
+            height: 13vh;
+        }
+/* fin pagina donde se agrega una nueva palabra */
+
+/*? pagina donde se desarrolla el juego */
+#pagina-juego{
+    background-color: azure;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+}
+    /* zona de muñeco ahorcado */
+    .muneco{
+        height: 55vh;
+        width: 40vw;
+        background-color: skyblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+        /* canvas del muñeco */
+        #canvas{
+            background-color: gray;
+            width: 80%;
+            height: 100%;
+        }
+    /* zona que muestra palabra a adivinar */
+    .palabra{
+        height: 10vh;
+        width: 50vw;
+        background-color: aqua;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2vw;
+    }
+        /* estilo de cada div por cada letra de la palabra aleatoria */
+        .letra{
+            width: 3rem;
+            height: 90%;
+            text-align: center;
+            font-size: 3rem;
+            border-bottom: 5px solid black;
+            text-transform: uppercase;
+        }
+    /* zona muestra letras incorrectas */
+    .letras-incorrectas{
+        font-size: 1.4rem;
+        font-family: Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        padding-bottom: 2vh;
+        letter-spacing: 2rem;
+        text-align: center;
+    }
+    /* botones */
+    .nuevo-juego{
+        width: 20vw;
+        height: 9vh;
+    }
+
+    .desistir{
+        width: 20vw;
+        height: 9vh;
+    }
+
+footer{
+    height: 5vh;
+    background-color: rgb(93, 81, 66);
+}
+
+
