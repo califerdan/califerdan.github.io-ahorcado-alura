@@ -10,7 +10,9 @@ var paginaJuego = document.getElementById('pagina-juego');
 var paginaAgregarPalabra = document.getElementById('pagina-agregar-palabra');
 var palabraIngresada = document.getElementById('nueva-palabra');
 var letrasIncorrectas = document.getElementById('letras-incorrectas');
+var volverInicio = document.getElementById('volver-inicio');
 
+volverInicio.onclick = cancelar;
 botonIniciar.onclick = iniciar;
 botonAgregarPalabra.onclick = agregarPalabra;
 botonNuevoJuego.onclick = nuevoJuego;
@@ -78,7 +80,6 @@ function dibujarMuneco(cantErrores){
         ctx.lineTo(276, 250);
         ctx.stroke(); break; 
        case 6:
-        ctx.beginPath();
         ctx.moveTo(276, 140);
         ctx.lineTo(326, 200); 
         ctx.stroke(); break; 
@@ -97,6 +98,26 @@ function dibujarMuneco(cantErrores){
     }
 }
 
+function resultadoJuego(resultado){
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    ctx.beginPath();
+    ctx.font = "70px Georgia";
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0,canvas.height/2-50,canvas.width,100);
+    ctx.stroke();
+    switch(resultado){
+        case 'perder':
+            ctx.fillStyle = 'red';
+            ctx.fillText("PERDISTE",30,canvas.height/2+20);
+            break;
+        case 'ganar':
+            ctx.fillStyle = 'greenyellow';
+            ctx.fillText("GANASTE",30,canvas.height/2+20);
+            break;
+    }
+}
+
 //! funcionalidades
 // * generar palabra aleatoria de la lista de palabras
 // * agregar palabra a la lista, verificar que no se repita
@@ -108,15 +129,16 @@ function dibujarMuneco(cantErrores){
 // * boton cancelar
 // * crear div por cada letra
 // * verificar las letras ingresadas 
-// TODO: evento/mensaje cuando gana cuando pierde
-// TODO: animacion/colores muñeco
+// * evento/mensaje cuando gana cuando pierde
+// * colores muñeco
 // TODO: responsive
 // TODO: tablet
 // TODO: movil
-// TODO: Titulo que vuelva al inicio
+// * boton que vuelva al inicio
 // TODO: que se guarde la palabra en el localstorage
 // * fuentes - colores
 // * redes sociales - pie de pagina
+// * icono
 
 function crearElemento () {   
     palabra = listaPalabras[(Math.floor(Math.random()*listaPalabras.length))].toUpperCase();
@@ -134,13 +156,16 @@ function reiniciarValores(){
     aciertos=0;
     letrasIncorrectas.innerHTML ='';
     letrasUsadasIncorrectas=[];
+    botonDesistir.disabled = false;
     dibujarMuneco(0);
     if(!primerJuego){
         resetearZonaPalabra();
     }
     primerJuego = false;
 }
+
 function nuevoJuego(){
+    volverInicio.style.visibility='visible';
     reiniciarValores();
     crearElemento();
     document.addEventListener('keydown',verificarLetra);
@@ -174,7 +199,8 @@ function letraCorrecta(letra){
 }
 
 function finJuegoGanaste(){
-    console.log('ganaste');
+    resultadoJuego('ganar');
+    botonDesistir.disabled = true;
     document.removeEventListener('keydown', verificarLetra);
 }
 
@@ -196,7 +222,7 @@ function letraIncorrecta(letra){
 
 function finJuegoPerdiste(){
     mostrarPalabra();    
-    console.log('fin del juego, perdiste');
+    resultadoJuego('perder');
     document.removeEventListener('keydown', verificarLetra);
 }
 
@@ -213,10 +239,10 @@ function mostrarPalabra(){
 }
 
 function desistir(){
-    finJuegoPerdiste();
     for(var i=1; i<10; i++){
         dibujarMuneco(i);
     }
+    finJuegoPerdiste();
 }
 
 function iniciar(){
@@ -237,20 +263,18 @@ function cancelar(){
     paginaAgregarPalabra.style.display = 'none';
     paginaJuego.style.display = 'none';
     paginaInicio.style.display = 'flex';
+    volverInicio.style.visibility='hidden';
 }
 
 function guardarPalabra(){
     var nuevaPalabra = palabraIngresada.value;
-    if(nuevaPalabra.match(/^[a-zñ]$/i)){
-    if(!listaPalabras.includes(nuevaPalabra.toLowerCase())){
-        listaPalabras.push(nuevaPalabra);
-        alert('correcto');
+    if(nuevaPalabra.match(/[a-zñ]$/i)){
+        if(!listaPalabras.includes(nuevaPalabra.toLowerCase())){
+            listaPalabras.push(nuevaPalabra);
+            iniciar();
+        }
+        else{
+            alert('Palabra ya ingresada');
+        }  
     }
-    else{
-        alert('palabra ya ingresada');
-    }
-}
-
-    palabraIngresada.value='';
-    iniciar();
 }
