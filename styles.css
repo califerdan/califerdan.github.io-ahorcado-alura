@@ -3,14 +3,17 @@
     margin: 0;
 }
 
+:root{
+    --fuente: 'Inter', sans-serif;
+    --color-principal: darkblue;
+}
+
 /*? encabezado */
 header{
     height: 10vh;
     display: flex;
     align-items: center;
-    background-color: blueviolet;
 }
-
     #logo{
         padding-left: 1.5vw;
         width: 2vw;
@@ -20,7 +23,6 @@ header{
 
 main{
     height: 85vh;
-    background-color: aqua;
 }
 
 /*? pagina de inicio */
@@ -30,56 +32,51 @@ main{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 40px;
-
-
-    display: none;
-
-    
+    gap: 40px;   
 }
     /* zona de botones en pagina inicial */
     .boton{
         border-radius: 1em;
-        border: 3px solid darkblue;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 1.3em;
+        border: 6px solid var(--color-principal);
+        font-family: var(--fuente);
+        font-size: 3rem;
     }
     /* boton iniciar juego */
     .iniciar{
-        background-color: darkblue;
-        width: 25vw;
-        height: 15vh;
+        background-color: var(--color-principal);
+        width: 35vw;
+        height: 20vh;
         color: white;
     }
     /* boton agregar nueva palabra */
     .agregar{
+        font-size: 2rem;
         background-color: transparent;
-        color: darkblue;
-        width: 20vw;
-        height: 7vh;
+        color: var(--color-principal);
+        width: 25vw;
+        height: 15vh;
     }
 /* fin pagina de inicio */
 
 /* ? pagina donde se agrega una nueva palabra  */
 #pagina-agregar-palabra{
     height: 100%;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1vw;
-
     display: none;
 }   
     /* textarea para cargar nueva palabra */
     #nueva-palabra{
         height: 50%;
         width: 50%;
-        font-size: 2.5rem;
+        font-size: 4rem;
         resize: none;
         outline: none;
-        color: darkblue;
+        color: var(--color-principal);
         font-weight: 500;
+        border: none;
     }
     /* zona mensaje de advertencia */
     #zona-advertencia{
@@ -90,12 +87,12 @@ main{
         align-items: center;
     }
         #img-advertencia{
-            width: 1.2rem;
-            height: 1.2rem;
+            width: 2.5rem;
+            height: 2.5rem;
         }
         #mensaje{
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 1em;
+            font-family: var(--fuente);
+            font-size: 2rem;
         }
     /* zona de botones*/
     .botones{
@@ -103,49 +100,60 @@ main{
         align-items: center;
         justify-content: center;
         gap: 2vw;
+        font-size: 1rem;
     }
         /* boton guardar */
         .guardar{
             width: 25vw;
             height: 13vh;
+            background-color: var(--color-principal);
+            color: white;
         }
         /* boton cancelar */
         .cancelar{
             width: 25vw;
             height: 13vh;
+            color: var(--color-principal);
         }
 /* fin pagina donde se agrega una nueva palabra */
 
+.boton:hover{
+    box-shadow: 6px 6px black;
+    animation-duration: 500ms;
+}
+
+.boton:active{
+    scale: 1.1;
+    animation-duration: 700ms;
+}
+
 /*? pagina donde se desarrolla el juego */
 #pagina-juego{
-    background-color: azure;
     width: 100%;
     height: 100%;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1vh;
+    display: none;
 }
     /* zona de muñeco ahorcado */
     .muneco{
         height: 55vh;
         width: 40vw;
-        background-color: skyblue;
         display: flex;
         justify-content: center;
         align-items: center;
     }
         /* canvas del muñeco */
         #canvas{
-            background-color: gray;
-            
+            width: 80%;
+            height: 100%;
         }
     /* zona que muestra palabra a adivinar */
     .palabra{
         height: 10vh;
         width: 50vw;
-        background-color: aqua;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -154,36 +162,53 @@ main{
     }
         /* estilo de cada div por cada letra de la palabra aleatoria */
         .letra{
-            width: 3rem;
-            height: 90%;
-            text-align: center;
-            font-size: 3rem;
-            border-bottom: 5px solid black;
+            font-family: var(--fuente);
+            width: 5rem;
+            height: 70%;
+            font-size: 5rem;
+            border-bottom: 7px solid black;
             text-transform: uppercase;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     /* zona muestra letras incorrectas */
     .letras-incorrectas{
-        font-size: 1.4rem;
-        font-family: Arial, Helvetica, sans-serif;
+        font-size: 3rem;
+        font-family: var(--fuente);
         text-transform: uppercase;
         padding-bottom: 2vh;
-        letter-spacing: 2rem;
+        letter-spacing: 1rem;
         text-align: center;
+        color: rgba(191, 15, 15, 0.646);
     }
     /* botones */
     .nuevo-juego{
-        width: 20vw;
-        height: 9vh;
+        width: 25vw;
+        height: 11vh;
+        background-color: var(--color-principal);
+        color: white;
     }
-
     .desistir{
-        width: 20vw;
-        height: 9vh;
+        width: 25vw;
+        height: 11vh;
+        color: var(--color-principal);
     }
 
 footer{
     height: 5vh;
-    background-color: rgb(93, 81, 66);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1vw;
+    font-size: 2rem;
+    font-family: var(--fuente);
 }
 
+    .social{
+        width: 40px;
+        height: 40px;
+        vertical-align: middle;
+    }
 
