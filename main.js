@@ -20,7 +20,6 @@ botonDesistir.onclick = desistir;
 botonGuargarPalabra.onclick = guardarPalabra;
 botonCancelar.onclick = cancelar;
 
-// variables globales
 var errores; 
 var listaPalabras = ['gato', 'ñandu', 'conejo', 'gusano', 'araña', 'hiena','cangrejo', 'caballo','perro','avestruz','oveja','kiwi','orca','delfin','raton','rana','lobo','mono','simio','elefante','flamenco','gacela','gorila','bisonte','buho','coyote','hamster','iguana','nutria','marmota','pantera','pelicano','vicuña','tortuga'];
 var palabra;
@@ -29,6 +28,7 @@ var letrasUsadas;
 var primerJuego = true;
 var aciertos;
 var letrasUsadasIncorrectas;
+var anchoPantalla = screen.width;
 
 function dibujarMuneco(cantErrores){
     var canvas = document.getElementById("canvas");
@@ -102,18 +102,18 @@ function resultadoJuego(resultado){
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     ctx.beginPath();
-    ctx.font = "70px Georgia";
+    ctx.font = "70px Inter";
     ctx.fillStyle = 'black';
     ctx.fillRect(0,canvas.height/2-50,canvas.width,100);
     ctx.stroke();
     switch(resultado){
-        case 'perder':
+        case 'perdiste':
             ctx.fillStyle = 'red';
-            ctx.fillText("PERDISTE",30,canvas.height/2+20);
+            ctx.fillText("PERDISTE",28,canvas.height/2+25);
             break;
-        case 'ganar':
+        case 'ganaste':
             ctx.fillStyle = 'greenyellow';
-            ctx.fillText("GANASTE",30,canvas.height/2+20);
+            ctx.fillText("GANASTE",28,canvas.height/2+25);
             break;
     }
 }
@@ -131,17 +131,15 @@ function resultadoJuego(resultado){
 // * verificar las letras ingresadas 
 // * evento/mensaje cuando gana cuando pierde
 // * colores muñeco
-// TODO: responsive
-// TODO: tablet
-// TODO: movil
+// * responsive
+// * tablet
+// * movil
 // * boton que vuelva al inicio
-// TODO: que se guarde la palabra en el localstorage
 // * fuentes - colores
 // * redes sociales - pie de pagina
 // * icono
 
-function crearElemento () {   
-    palabra = listaPalabras[(Math.floor(Math.random()*listaPalabras.length))].toUpperCase();
+function crearGuiones() {   
     contenedorLetra=[];
     for(var i=0; i<palabra.length; i++){
         contenedorLetra[i] = document.createElement("div");
@@ -161,14 +159,26 @@ function reiniciarValores(){
     if(!primerJuego){
         resetearZonaPalabra();
     }
-    primerJuego = false;
 }
 
 function nuevoJuego(){
     volverInicio.style.visibility='visible';
     reiniciarValores();
-    crearElemento();
-    document.addEventListener('keydown',verificarLetra);
+    palabra = listaPalabras[(Math.floor(Math.random()*listaPalabras.length))].toUpperCase();
+    crearGuiones();
+        if(anchoPantalla<=1023 && primerJuego){
+            mostrarTeclado();
+            verificarLetraTeclado();
+        }
+        else{
+            if(anchoPantalla<=1023){
+            verificarLetraTeclado();
+            }
+            else{
+                document.addEventListener('keydown',verificarLetra);
+            }
+        }
+        primerJuego = false;
 }
 
 function verificarLetra(event){
@@ -199,7 +209,7 @@ function letraCorrecta(letra){
 }
 
 function finJuegoGanaste(){
-    resultadoJuego('ganar');
+    resultadoJuego('ganaste');
     botonDesistir.disabled = true;
     document.removeEventListener('keydown', verificarLetra);
 }
@@ -222,7 +232,7 @@ function letraIncorrecta(letra){
 
 function finJuegoPerdiste(){
     mostrarPalabra();    
-    resultadoJuego('perder');
+    resultadoJuego('perdiste');
     document.removeEventListener('keydown', verificarLetra);
 }
 
@@ -276,5 +286,45 @@ function guardarPalabra(){
         else{
             alert('Palabra ya ingresada');
         }  
+    }
+}
+
+function mostrarTeclado(){
+    var teclado = document.getElementById('teclado');
+    var contenedorTecla=[];
+    var cadenaLetras = 'qwertyuiopasdfghjklñzxcvbnm';
+        for(var i=0; i<cadenaLetras.length; i++){
+            contenedorTecla[i] = document.createElement("button");
+            contenedorTecla[i].className = 'tecla';
+            contenedorTecla[i].innerHTML = cadenaLetras.charAt(i).toUpperCase();
+            // contenedorTecla[i].style.fontWeight = '700';
+            teclado.appendChild(contenedorTecla[i]);
+            if(i===20){
+                contenedorTecla[i].className = 'tecla item';
+            }
+        } 
+}
+
+function verificarLetraTeclado (){
+    var tecla = document.getElementsByClassName('tecla');
+    for(i=0 ; i<tecla.length ; i++){
+        tecla[i].addEventListener("click", validacionTecla);
+        tecla[i].disabled = false;
+        tecla[i].style.backgroundColor = 'rgb(170, 222, 235)';
+        tecla[i].style.color = 'black';
+    }
+}   
+
+function validacionTecla(event){
+    const teclaPresionada = event.target;
+    teclaPresionada.style.backgroundColor = '#D51C1C';
+    teclaPresionada.style.color = 'white';
+    teclaPresionada.disabled = true;
+    const tecla = teclaPresionada.innerHTML;
+    if(palabra.includes(tecla)){
+        letraCorrecta(tecla);
+    }
+    else{
+        letraIncorrecta(tecla);
     }
 }
