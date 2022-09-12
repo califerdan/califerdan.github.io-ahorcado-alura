@@ -31,7 +31,7 @@ header{
         font-size: 2rem;
         padding: 10px;
         border-radius: 10px;
-        border: none;
+        border: 2px solid darkblue;
         visibility: hidden;
     }
 /* fin encabezado */
@@ -149,7 +149,7 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1vh;
+    gap: .5vh;
     display: none;
 }
     /* zona de muñeco ahorcado */
@@ -192,7 +192,6 @@ main{
         font-size: 3rem;
         font-family: var(--fuente);
         text-transform: uppercase;
-        /*padding-bottom: 2vh;*/
         letter-spacing: 1rem;
         text-align: center;
         color: rgba(191, 15, 15, 0.646);
@@ -276,7 +275,7 @@ header{
         font-size: 1.4rem;
         padding: 10px;
         border-radius: 10px;
-        border: none;
+        border: 2px solid darkblue;
         visibility: hidden;
     }
 /* fin encabezado */
@@ -514,7 +513,7 @@ header{
         font-size: 1.8rem;
         padding: 18px;
         border-radius: 10px;
-        border: none;
+        border: 2px solid darkblue;
         visibility: hidden;
     }
 /* fin encabezado */
